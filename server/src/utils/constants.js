@@ -1,10 +1,4 @@
 export {}
-/**
- * Centralized constants shared across all backend modules.
- * These mirror the enums used on the frontend (client/src/utils/constants.js)
- * and must stay in sync. Agreed upfront by the team — avoid editing
- * without communicating with all members.
- */
 
 // -------------------- Roles --------------------
 export const ROLES = Object.freeze({
