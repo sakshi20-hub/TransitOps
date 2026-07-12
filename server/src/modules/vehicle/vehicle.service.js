@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-export {}
-=======
 import Vehicle from "../../models/Vehicle.js";
 
 // Create a new vehicle
@@ -89,4 +86,3 @@ export const updateVehicleStatus = async (id, status) => {
   }
   return vehicle;
 };
->>>>>>> origin/main

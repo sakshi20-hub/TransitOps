@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-export {}
-=======
 import mongoose from "mongoose";
 
 const vehicleSchema = new mongoose.Schema(
@@ -48,4 +45,3 @@ const vehicleSchema = new mongoose.Schema(
 const Vehicle = mongoose.model("Vehicle", vehicleSchema);
 
 export default Vehicle;
->>>>>>> origin/main

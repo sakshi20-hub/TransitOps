@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-export {}
-=======
 import * as vehicleService from "./vehicle.service.js";
 
 export const createVehicle = async (req, res) => {
@@ -61,4 +58,3 @@ export const getDispatchEligibleVehicles = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
->>>>>>> origin/main
