@@ -38,5 +38,5 @@ export const authMiddleware = (req, res, next) => {
 export const authenticate=authMiddleware;
 export default authMiddleware;
 
-export default authMiddleware;
+
 

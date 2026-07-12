@@ -10,6 +10,8 @@ import driverRoutes from './modules/driver/driver.routes.js';
 import vehicleRoutes from './modules/vehicle/vehicle.routes.js'
 import tripRoutes from './modules/trip/trip.routes.js'
 import maintenanceRoutes from './modules/maintenance/maintenance.routes.js'
+import fuelExpenseRoutes from './modules/fuelExpense/fuelExpense.routes.js'
+import analyticsRoutes from './modules/analytics/analytics.routes.js'
 const app = express();
 
 // -------------------- Global Middlewares --------------------
