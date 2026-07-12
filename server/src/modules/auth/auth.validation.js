@@ -4,10 +4,6 @@ export {}
 import Joi from 'joi';
 import { ROLE_VALUES } from '../../utils/constants.js';
 
-/**
- * Validation schema for POST /api/auth/register
- * Consumed by validateRequest(registerSchema) in auth.routes.js.
- */
 export const registerSchema = Joi.object({
   name: Joi.string().trim().min(2).max(100).required().messages({
     'string.empty': 'Name is required',
@@ -34,10 +30,6 @@ export const registerSchema = Joi.object({
     }),
 });
 
-/**
- * Validation schema for POST /api/auth/login
- * Consumed by validateRequest(loginSchema) in auth.routes.js.
- */
 export const loginSchema = Joi.object({
   email: Joi.string().trim().lowercase().email().required().messages({
     'string.email': 'Please provide a valid email address',

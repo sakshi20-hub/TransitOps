@@ -4,12 +4,6 @@ export {}
 import authService from './auth.service.js';
 import { HTTP_STATUS } from '../../utils/constants.js';
 
-/**
- * POST /api/auth/register
- * Creates a new user account and returns a JWT.
- * Request body is expected to already be validated by
- * validateRequest(registerSchema) before reaching this controller.
- */
 export const register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
@@ -26,10 +20,6 @@ export const register = async (req, res, next) => {
   }
 };
 
-/**
- * POST /api/auth/login
- * Authenticates a user and returns a JWT.
- */
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -46,11 +36,6 @@ export const login = async (req, res, next) => {
   }
 };
 
-/**
- * GET /api/auth/me
- * Returns the currently authenticated user's profile.
- * Requires authMiddleware to have populated req.user.id from the JWT.
- */
 export const getMe = async (req, res, next) => {
   try {
     const user = await authService.getCurrentUser(req.user.id);
