@@ -7,6 +7,9 @@ import { API_PREFIX, HTTP_STATUS } from './utils/constants.js';
 import { notFoundHandler, errorHandler } from './middlewares/errorHandler.js';
 import authRoutes from "./modules/auth/auth.routes.js"
 import driverRoutes from './modules/driver/driver.routes.js';
+import vehicleRoutes from './modules/vehicle/vehicle.routes.js'
+import tripRoutes from './modules/trip/trip.routes.js'
+import maintenanceRoutes from './modules/maintenance/maintenance.routes.js'
 const app = express();
 
 // -------------------- Global Middlewares --------------------
@@ -49,10 +52,10 @@ app.get(`${API_PREFIX}/health`, (req, res) => {
 app.use(`${API_PREFIX}/auth`, authRoutes);
 app.use(`${API_PREFIX}/vehicles`, vehicleRoutes);
 app.use(`${API_PREFIX}/drivers`, driverRoutes);
-// app.use(`${API_PREFIX}/trips`, tripRoutes);
-// app.use(`${API_PREFIX}/maintenance`, maintenanceRoutes);
-// app.use(`${API_PREFIX}/fuel-expenses`, fuelExpenseRoutes);
-// app.use(`${API_PREFIX}/analytics`, analyticsRoutes);
+app.use(`${API_PREFIX}/trips`, tripRoutes);
+app.use(`${API_PREFIX}/maintenance`, maintenanceRoutes);
+app.use(`${API_PREFIX}/fuel-expenses`, fuelExpenseRoutes);
+app.use(`${API_PREFIX}/analytics`, analyticsRoutes);
 
 // -------------------- Error Handling --------------------
 // Must be registered after all routes.

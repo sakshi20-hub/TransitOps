@@ -34,4 +34,5 @@ export const rbacMiddleware = (...allowedRoles) => {
   };
 };
 
+export const authorize=rbacMiddleware
 export default rbacMiddleware;
