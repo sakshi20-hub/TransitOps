@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import { API_PREFIX, HTTP_STATUS } from './utils/constants.js';
 import { notFoundHandler, errorHandler } from './middlewares/errorHandler.js';
 import authRoutes from "./modules/auth/auth.routes.js"
+import driverRoutes from './modules/driver/driver.routes.js';
 const app = express();
 
 // -------------------- Global Middlewares --------------------
@@ -46,8 +47,8 @@ app.get(`${API_PREFIX}/health`, (req, res) => {
 // Business modules are mounted here as they are implemented.
 //
 app.use(`${API_PREFIX}/auth`, authRoutes);
-// app.use(`${API_PREFIX}/vehicles`, vehicleRoutes);
-// app.use(`${API_PREFIX}/drivers`, driverRoutes);
+app.use(`${API_PREFIX}/vehicles`, vehicleRoutes);
+app.use(`${API_PREFIX}/drivers`, driverRoutes);
 // app.use(`${API_PREFIX}/trips`, tripRoutes);
 // app.use(`${API_PREFIX}/maintenance`, maintenanceRoutes);
 // app.use(`${API_PREFIX}/fuel-expenses`, fuelExpenseRoutes);
