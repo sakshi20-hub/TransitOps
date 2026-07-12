@@ -1,7 +1,6 @@
 import driverService from './driver.service.js';
 import { HTTP_STATUS } from '../../utils/constants.js';
 
-
 export const createDriver = async (req, res, next) => {
   try {
     const driver = await driverService.createDriver(req.body);
@@ -32,7 +31,6 @@ export const getAllDrivers = async (req, res, next) => {
   }
 };
 
-
 export const getAvailableDrivers = async (req, res, next) => {
   try {
     const drivers = await driverService.getDispatchEligibleDrivers();
@@ -46,7 +44,6 @@ export const getAvailableDrivers = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const getDriverById = async (req, res, next) => {
   try {
@@ -62,7 +59,6 @@ export const getDriverById = async (req, res, next) => {
   }
 };
 
-
 export const updateDriver = async (req, res, next) => {
   try {
     const driver = await driverService.updateDriver(req.params.id, req.body);
@@ -76,7 +72,6 @@ export const updateDriver = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const deleteDriver = async (req, res, next) => {
   try {

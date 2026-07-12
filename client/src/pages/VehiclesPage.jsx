@@ -1,116 +1,87 @@
-import { useMemo, useState } from "react";
-import VehicleTable from "../components/vehicle/VehicleTable";
-import VehicleFormModal from "../components/vehicle/VehicleFormModal";
-import {
-  useCreateVehicle,
-  useDeleteVehicle,
-  useUpdateVehicle,
-  useVehicles,
-} from "../hooks/useVehicles";
-import "./page.css";
+import { useState, useMemo } from 'react'
+import { Plus } from 'lucide-react'
+import { useVehicles } from '../hooks/useVehicles'
+import VehicleTable from '../components/vehicle/VehicleTable'
+import VehicleFormModal from '../components/vehicle/VehicleFormModal'
+import VehicleFilterBar from '../components/vehicle/VehicleFilterBar'
+import Button from '../components/common/Button'
+import Loader from '../components/common/Loader'
 
-export default function VehiclesPage() {
-  const { data: vehicles = [], isLoading, isError } = useVehicles();
+function VehiclesPage() {
+  const { vehicles, loading, addVehicle, editVehicle, removeVehicle } = useVehicles()
 
-  const createMutation = useCreateVehicle();
-  const updateMutation = useUpdateVehicle();
-  const deleteMutation = useDeleteVehicle();
+  const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingVehicle, setEditingVehicle] = useState(null)
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingVehicle, setEditingVehicle] = useState(null);
+  const filteredVehicles = useMemo(() => {
+    return vehicles.filter((v) => {
+      const matchesStatus = statusFilter === 'all' || v.status === statusFilter
+      const matchesSearch =
+        !search ||
+        v.number.toLowerCase().includes(search.toLowerCase()) ||
+        v.driver.toLowerCase().includes(search.toLowerCase())
+      return matchesStatus && matchesSearch
+    })
+  }, [vehicles, search, statusFilter])
 
-  const summary = useMemo(() => {
-    const active = vehicles.filter((vehicle) => vehicle.status === "Active");
-    const underMaintenance = vehicles.filter((vehicle) => vehicle.status === "Under Maintenance");
-    const unassigned = vehicles.filter((vehicle) => !vehicle.assignedDriver);
-    return {
-      total: vehicles.length,
-      activeCount: active.length,
-      underMaintenanceCount: underMaintenance.length,
-      unassignedCount: unassigned.length,
-    };
-  }, [vehicles]);
+  const handleAddClick = () => {
+    setEditingVehicle(null)
+    setModalOpen(true)
+  }
 
-  const openCreateModal = () => {
-    setEditingVehicle(null);
-    setIsModalOpen(true);
-  };
+  const handleEditClick = (vehicle) => {
+    setEditingVehicle(vehicle)
+    setModalOpen(true)
+  }
 
-  const openEditModal = (vehicle) => {
-    setEditingVehicle(vehicle);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setEditingVehicle(null);
-  };
-
-  const handleSubmit = (values) => {
+  const handleSave = (form) => {
     if (editingVehicle) {
-      updateMutation.mutate({ id: editingVehicle.id, payload: values }, { onSuccess: closeModal });
+      editVehicle(editingVehicle.id, form)
     } else {
-      createMutation.mutate(values, { onSuccess: closeModal });
+      addVehicle(form)
     }
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm("Remove this vehicle from the fleet?")) {
-      deleteMutation.mutate(id);
-    }
-  };
+  }
 
   return (
-    <div className="page-container">
+    <div>
       <div className="page-header">
         <div>
-          <h1>Vehicles</h1>
-          <p className="page-subtitle">Manage your fleet of vehicles and driver assignments</p>
+          <h1 className="page-title">Vehicles</h1>
+          <p className="page-subtitle">Manage your fleet's vehicles and their current status</p>
         </div>
-        <button type="button" className="page-primary-btn" onClick={openCreateModal}>
-          + Add Vehicle
-        </button>
+        <Button onClick={handleAddClick}>
+          <Plus size={16} />
+          Add Vehicle
+        </Button>
       </div>
 
-      <div className="page-kpi-row">
-        <div className="page-kpi-card">
-          <span className="page-kpi-label">Total Vehicles</span>
-          <span className="page-kpi-value">{summary.total}</span>
-        </div>
-        <div className="page-kpi-card">
-          <span className="page-kpi-label">Active</span>
-          <span className="page-kpi-value">{summary.activeCount}</span>
-        </div>
-        <div className="page-kpi-card">
-          <span className="page-kpi-label">Under Maintenance</span>
-          <span className="page-kpi-value">{summary.underMaintenanceCount}</span>
-        </div>
-        <div className="page-kpi-card">
-          <span className="page-kpi-label">Unassigned</span>
-          <span className="page-kpi-value">{summary.unassignedCount}</span>
-        </div>
+      <VehicleFilterBar
+        search={search}
+        onSearchChange={setSearch}
+        statusFilter={statusFilter}
+        onStatusChange={setStatusFilter}
+      />
+
+      <div className="card table-card">
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="table-scroll">
+            <VehicleTable vehicles={filteredVehicles} onEdit={handleEditClick} onDelete={removeVehicle} />
+          </div>
+        )}
       </div>
 
-      {isLoading && <div className="page-state-message">Loading vehicles...</div>}
-      {isError && <div className="page-state-message page-state-error">Failed to load vehicles.</div>}
-
-      {!isLoading && !isError && (
-        <VehicleTable
-          vehicles={vehicles}
-          onEdit={openEditModal}
-          onDelete={handleDelete}
-          isDeleting={deleteMutation.isPending}
-        />
-      )}
-
-      {isModalOpen && (
-        <VehicleFormModal
-          initialVehicle={editingVehicle}
-          onClose={closeModal}
-          onSubmit={handleSubmit}
-          isSubmitting={createMutation.isPending || updateMutation.isPending}
-        />
-      )}
+      <VehicleFormModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSave={handleSave}
+        editingVehicle={editingVehicle}
+      />
     </div>
-  );
+  )
 }
+
+export default VehiclesPage

@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { ROLE_VALUES } from '../utils/constants.js';
@@ -76,3 +77,4 @@ userSchema.methods.toJSON = function toSafeJSON() {
 const User = mongoose.model('User', userSchema);
 
 export default User;
+

@@ -2,8 +2,6 @@ import Vehicle from '../models/Vehicle.js';
 import Driver from '../models/Driver.js';
 import { VEHICLE_STATUS, DRIVER_STATUS } from '../utils/constants.js';
 
-// -------------------- Low-level setters --------------------
-
 export const setVehicleStatus = async (vehicleId, status, session = null) => {
   if (!Object.values(VEHICLE_STATUS).includes(status)) {
     const error = new Error(`Invalid vehicle status: ${status}`);
@@ -26,9 +24,6 @@ export const setVehicleStatus = async (vehicleId, status, session = null) => {
   return vehicle;
 };
 
-/**
- * Sets a driver's status directly. Throws if the driver doesn't exist.
- */
 export const setDriverStatus = async (driverId, status, session = null) => {
   if (!Object.values(DRIVER_STATUS).includes(status)) {
     const error = new Error(`Invalid driver status: ${status}`);
@@ -51,15 +46,11 @@ export const setDriverStatus = async (driverId, status, session = null) => {
   return driver;
 };
 
-// -------------------- Trip lifecycle transitions --------------------
-
-
 export const dispatchTrip = async ({ vehicleId, driverId }, session = null) => {
   const vehicle = await setVehicleStatus(vehicleId, VEHICLE_STATUS.ON_TRIP, session);
   const driver = await setDriverStatus(driverId, DRIVER_STATUS.ON_TRIP, session);
   return { vehicle, driver };
 };
-
 
 export const completeTrip = async ({ vehicleId, driverId }, session = null) => {
   const vehicle = await setVehicleStatus(vehicleId, VEHICLE_STATUS.AVAILABLE, session);
@@ -73,13 +64,9 @@ export const cancelDispatchedTrip = async ({ vehicleId, driverId }, session = nu
   return { vehicle, driver };
 };
 
-// -------------------- Maintenance lifecycle transitions --------------------
-
-
 export const openMaintenance = async (vehicleId, session = null) => {
   return setVehicleStatus(vehicleId, VEHICLE_STATUS.IN_SHOP, session);
 };
-
 
 export const closeMaintenance = async (vehicleId, session = null) => {
   const vehicle = await Vehicle.findById(vehicleId).session(session);
@@ -96,9 +83,6 @@ export const closeMaintenance = async (vehicleId, session = null) => {
 
   return setVehicleStatus(vehicleId, VEHICLE_STATUS.AVAILABLE, session);
 };
-
-// -------------------- Availability queries --------------------
-
 
 export const getAvailableVehicles = async (filter = {}) => {
   return Vehicle.find({ ...filter, status: VEHICLE_STATUS.AVAILABLE });

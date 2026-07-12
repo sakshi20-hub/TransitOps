@@ -1,4 +1,5 @@
 
+
 import { ROLE_VALUES, HTTP_STATUS } from '../utils/constants.js';
 
 export const rbacMiddleware = (...allowedRoles) => {
@@ -34,5 +35,9 @@ export const rbacMiddleware = (...allowedRoles) => {
   };
 };
 
+
 export const authorize=rbacMiddleware
 export default rbacMiddleware;
+
+export default rbacMiddleware;
+
