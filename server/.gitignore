@@ -1,1 +1,6 @@
 // TODO
+<<<<<<< HEAD
+=======
+.env
+node_modules/
+>>>>>>> origin/main
