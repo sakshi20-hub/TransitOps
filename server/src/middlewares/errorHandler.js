@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import { HTTP_STATUS } from '../utils/constants.js';
 
 
@@ -55,3 +58,4 @@ export const errorHandler = (err, req, res, next) => {
     ...(process.env.NODE_ENV !== 'production' && { stack: err.stack }),
   });
 };
+>>>>>>> origin/main

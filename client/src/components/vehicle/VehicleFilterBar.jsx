@@ -1,25 +1,35 @@
-import "./vehicle.css";
+import { Search } from 'lucide-react'
+import Select from '../common/Select'
 
-export default function VehicleFilterBar({ searchTerm, onSearchChange, statusFilter, onStatusChange }) {
+function VehicleFilterBar({ search, onSearchChange, statusFilter, onStatusChange }) {
   return (
-    <div className="veh-table-toolbar">
-      <input
-        type="text"
-        className="veh-search-input"
-        placeholder="Search by reg. number, model, or driver"
-        value={searchTerm}
-        onChange={(event) => onSearchChange(event.target.value)}
-      />
-      <select
-        className="veh-status-select"
+    <div className="filter-bar">
+      <div className="form-group filter-search">
+        <label>Search</label>
+        <div className="input-wrap">
+          <Search size={16} className="input-icon" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Search by number or driver"
+            className="has-icon"
+          />
+        </div>
+      </div>
+      <Select
+        label="Status"
         value={statusFilter}
-        onChange={(event) => onStatusChange(event.target.value)}
-      >
-        <option value="all">All statuses</option>
-        <option value="Active">Active</option>
-        <option value="Under Maintenance">Under Maintenance</option>
-        <option value="Inactive">Inactive</option>
-      </select>
+        onChange={onStatusChange}
+        options={[
+          { value: 'all', label: 'All' },
+          { value: 'Active', label: 'Active' },
+          { value: 'Maintenance', label: 'Maintenance' },
+          { value: 'Inactive', label: 'Inactive' }
+        ]}
+      />
     </div>
-  );
+  )
 }
+
+export default VehicleFilterBar

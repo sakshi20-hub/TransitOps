@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import { HTTP_STATUS } from '../utils/constants.js';
 
 
@@ -41,3 +44,4 @@ export const validateRequest = (schema, source = 'body') => {
 };
 
 export default validateRequest;
+>>>>>>> origin/main

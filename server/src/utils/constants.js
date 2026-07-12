@@ -1,4 +1,6 @@
 export {}
+<<<<<<< HEAD
+=======
 
 // -------------------- Roles --------------------
 export const ROLES = Object.freeze({
@@ -73,3 +75,4 @@ export const HTTP_STATUS = Object.freeze({
 
 // -------------------- API --------------------
 export const API_PREFIX = '/api';
+>>>>>>> origin/main

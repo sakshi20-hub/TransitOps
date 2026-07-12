@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import express from "express";
 import * as vehicleController from "./vehicle.controller.js";
 import { authenticate } from "../../middlewares/authMiddleware.js";
@@ -16,3 +19,4 @@ router.put("/:id", authorize("fleet_manager"), vehicleController.updateVehicle);
 router.delete("/:id", authorize("fleet_manager"), vehicleController.deleteVehicle);
 
 export default router;
+>>>>>>> origin/main

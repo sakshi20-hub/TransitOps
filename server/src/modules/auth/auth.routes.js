@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import { Router } from 'express';
 
 import authController from './auth.controller.js';
@@ -17,3 +20,4 @@ router.post('/login', validateRequest(loginSchema), authController.login);
 router.get('/me', authMiddleware, authController.getMe);
 
 export default router;
+>>>>>>> origin/main

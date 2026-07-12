@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 
 import express from 'express';
 import cors from 'cors';
@@ -60,3 +63,4 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 export default app;
+>>>>>>> origin/main

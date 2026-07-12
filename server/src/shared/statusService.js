@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import Vehicle from '../models/Vehicle.js';
 import Driver from '../models/Driver.js';
 import { VEHICLE_STATUS, DRIVER_STATUS } from '../utils/constants.js';
@@ -120,3 +123,4 @@ export default {
   getAvailableVehicles,
   getAvailableDrivers,
 };
+>>>>>>> origin/main

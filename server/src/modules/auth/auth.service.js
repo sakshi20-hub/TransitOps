@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 import { HTTP_STATUS } from '../../utils/constants.js';
@@ -69,3 +72,4 @@ export default {
   loginUser,
   getCurrentUser,
 };
+>>>>>>> origin/main

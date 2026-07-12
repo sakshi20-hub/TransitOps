@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 
 import jwt from 'jsonwebtoken';
 
@@ -35,3 +38,4 @@ export const authMiddleware = (req, res, next) => {
 };
 
 export default authMiddleware;
+>>>>>>> origin/main

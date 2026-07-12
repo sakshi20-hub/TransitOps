@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 const VALID_STATUSES = ["Available", "On Trip", "In Shop", "Retired"];
 
 export const validateCreateVehicle = (data) => {
@@ -59,3 +62,4 @@ export const validateUpdateVehicle = (data) => {
 
   return errors;
 };
+>>>>>>> origin/main

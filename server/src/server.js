@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 
 import dotenv from 'dotenv';
 
@@ -67,3 +70,4 @@ process.on('uncaughtException', (err) => {
 });
 
 startServer();
+>>>>>>> origin/main

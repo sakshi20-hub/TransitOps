@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 import Joi from 'joi';
 import { ROLE_VALUES } from '../../utils/constants.js';
 
@@ -50,3 +53,4 @@ export default {
   registerSchema,
   loginSchema,
 };
+>>>>>>> origin/main

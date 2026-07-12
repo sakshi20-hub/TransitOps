@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+export {}
+=======
 
 const getTimestamp = () => new Date().toISOString();
 
@@ -21,3 +24,4 @@ const debug = (message, meta = "") => {
 const logger = { info, warn, error, debug };
 
 export default logger;
+>>>>>>> origin/main
